@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "root.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "start": "nodemon root.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nano": "^10.1.4",
+    "nanoid": "^4.0.2",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
