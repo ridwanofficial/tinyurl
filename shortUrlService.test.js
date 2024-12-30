@@ -68,6 +68,34 @@ describe('Short URL Service Tests', () => {
         expect(response.status).toBe(404);
         expect(response.body.error).toBe('Short URL not found');
     });
+
+     test('Should handle edge cases with very long URLs', async () => {
+        const longUrl = 'https://' + 'a'.repeat(5000) + '.com';
+        const response = await request(app)
+            .post('/shorten')
+            .send({ longUrl });
+
+        expect(response.status).toBe(200);
+        expect(response.body.shortUrl).toHaveLength(6);
+    });
+
+     test('Should sanitize inputs with script tags (XSS)', async () => {
+        const maliciousUrl = 'https://example.com<script>alert("XSS")</script>';
+        const response = await request(app)
+            .post('/shorten')
+            .send({ longUrl: maliciousUrl });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('Should sanitize inputs with SQL injection attempts', async () => {
+        const maliciousUrl = 'https://example.com\' OR 1=1 --';
+        const response = await request(app)
+            .post('/shorten')
+            .send({ longUrl: maliciousUrl });
+
+        expect(response.status).toBe(400);
+    });
 });
 
 describe('Utility Function Tests', () => {
