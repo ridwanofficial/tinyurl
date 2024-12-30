@@ -1,16 +1,11 @@
 import crypto from 'crypto';
 import fs from 'fs';
+import { loadData } from './utils.js';
 
 // File to store the URL mappings
 const storageFile = 'urlStorage.json';
 
-// Helper function to load data from the JSON file
-function loadData() {
-    if (!fs.existsSync(storageFile)) {
-        fs.writeFileSync(storageFile, JSON.stringify({}));
-    }
-    return JSON.parse(fs.readFileSync(storageFile, 'utf-8'));
-}
+
 
 // Helper function to save data to the JSON file
 function saveData(data) {

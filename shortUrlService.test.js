@@ -1,7 +1,8 @@
 import request from 'supertest';
 import fs from 'fs';
 import express from 'express';
-import { isValidUrl, server ,app} from './root';
+import {  server ,app} from './root.js';
+import { isValidUrl } from './utils.js';
 
 describe('Short URL Service Tests', () => {
     beforeAll(() => {
